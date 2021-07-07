@@ -6,7 +6,7 @@
 # Server Requirments
 1. Install [NodeJS](https://nodejs.org/en/download/)
 2. Install [Yarn](https://yarnpkg.com/getting-started/install)
-3. (Optional) Install Make on MacOS `xcode-select --install` or [Make Window](http://gnuwin32.sourceforge.net/packages/make.htm)
+3. (Optional) Install Make on MacOS `xcode-select --install` or [Make Windows](http://gnuwin32.sourceforge.net/packages/make.htm)
 
 # Server Application
 1. Run `make setup`

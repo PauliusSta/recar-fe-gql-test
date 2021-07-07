@@ -11,7 +11,7 @@
 # Server Application
 1. Run `make setup`
 2. Run `make`
-3. Go to http://localhost:3000/graphql
+3. Go to http://localhost:3000
 
 Extra:
 1. To reset database `make reset`

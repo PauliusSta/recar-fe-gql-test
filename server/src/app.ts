@@ -13,7 +13,7 @@ export interface AppContext {
 	terminate: (signal: string) => void;
 }
 
-export async function createApp(): Promise<AppContext> {
+export async function createApp (): Promise<AppContext> {
 	await createDatabaseConnection()
 
 	const apollo = await createApollo()

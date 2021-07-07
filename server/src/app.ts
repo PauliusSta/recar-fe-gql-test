@@ -13,7 +13,7 @@ export interface AppContext {
 	terminate: (signal: string) => void;
 }
 
-export async function createApp (): Promise<AppContext> {
+export async function createApp(): Promise<AppContext> {
 	await createDatabaseConnection()
 
 	const apollo = await createApollo()
@@ -32,8 +32,9 @@ export async function createApp (): Promise<AppContext> {
 		console.info(signal)
 		if (!isDev) {
 			server.close(() => process.exit(0))
+		} else {
+			process.exit(0)
 		}
-		process.exit(0)
 	}
 
 	return {

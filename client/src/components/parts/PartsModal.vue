@@ -77,6 +77,16 @@
       }
     },
     mounted() {
+      if (this.part) {
+        this.formData = {
+          name: this.part.name,
+          price: this.part.price,
+          manufacturer: this.part.manufacturer,
+          model: this.part.model,
+          year: this.part.year,
+          color: this.part.color,
+        };
+      }
     }
   }
 </script>
@@ -140,7 +150,16 @@
       color: black;
     }
   }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
   input[type=text], input[type=number] {
     width: 100%;
     border: 1px solid #2c3e50;

@@ -9,21 +9,15 @@
 
     </div>
     <table style="width:100%" id="parts">
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Manufacturer</th>
-        <th>Model</th>
-        <th>Year</th>
-        <th>Color</th>
-        <th>Events</th>
-      </tr>
-      <v-parts-row
+      <v-parts-table-header
+          @setSortBy="setSortBy"
+      >
+      </v-parts-table-header>
+      <v-parts-table-row
           v-for="part in parts"
           :key="part.id"
           :part="part"
-      ></v-parts-row>
+      ></v-parts-table-row>
 
     </table>
     <div v-if="$apollo.queries.parts.loading">Loading...</div>
@@ -38,21 +32,32 @@
 </template>
 
 <script>
-  import VPartsRow from './PartsRow.vue'
+  import VPartsTableRow from './PartsTableRow.vue'
+  import VPartsTableHeader from './PartsTableHeader.vue'
   import VPartsModal from './PartsModal.vue'
 
-  import {GET_PARTS, ADD_PART} from '../../utils/querys'
+  import { GET_PARTS, ADD_PART } from '../../utils/querys'
 
   export default {
-    name: 'Parts',
+    name: 'PartsTableRow',
     components: {
-      VPartsRow,
+      VPartsTableRow,
+      VPartsTableHeader,
       VPartsModal,
     },
     apollo: {
       // Simple query that will update the 'hello' vue property
       parts: {
         query: GET_PARTS,
+        variables() {
+          return {
+            filters: {},
+            sortBy: {
+              direction: this.sortBy.direction,
+              field: this.sortBy.field,
+            },
+          }
+        },
         error(error) {
           this.error = JSON.stringify(error.message);
         }
@@ -61,11 +66,18 @@
     data() {
       return {
         error: null,
-        showEditModal: true,
+        showEditModal: false,
+        sortBy: {
+          direction: 'ASC',
+          field: 'ID',
+        },
       }
     },
     methods: {
-      handleShowAddModal: function () {
+      setSortBy(sortBy) {
+        this.sortBy = sortBy;
+      },
+      handleShowAddModal() {
         this.showEditModal = !this.showEditModal;
       },
       handleAddSubmit(part) {
@@ -110,14 +122,6 @@
     td, th {
       border: 1px solid #ddd;
       padding: 8px;
-
-      &:first-child {
-        width: 22px;
-      }
-
-      &:first-child {
-        width: 22px;
-      }
     }
 
     tr:nth-child(even) {
@@ -132,11 +136,31 @@
       padding-top: 12px;
       padding-bottom: 12px;
       text-align: left;
-      background-color: #04AA6D;
+      background-color: #343a40;
+      border-color: #454d55;
       color: white;
     }
+    button {
+      margin-right: 10px;
+    }
   }
+  button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    cursor: pointer;
 
+    &:hover {
+      background-color: #059862;
+    }
+  }
   .header {
     position: fixed;
     top: 0;

@@ -24,6 +24,18 @@ export default class PartResolver {
 		return this.partsRepository.find(payload)
 	}
 
+	@Query(() => [Part])
+	async filterValues (
+		@Args() { filters = {}, sortBy }: PartsArgs
+	): Promise<Part[]> {
+		filters;
+		sortBy;
+		return this.partsRepository.createQueryBuilder('color')
+			.select('DISTINCT ("color")')
+			.orderBy('color')
+			.getRawMany();
+	}
+
 	@Query(() => Part, { nullable: true })
 	async part (
 		@Args() { id }: PartArgs

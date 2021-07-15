@@ -4,7 +4,7 @@ import VueApollo from 'vue-apollo';
 import {ApolloClient} from 'apollo-client';
 import {createHttpLink} from 'apollo-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import { setContext } from 'apollo-link-context'
+import {setContext} from 'apollo-link-context'
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
@@ -16,7 +16,7 @@ Vue.use(VueApollo);
 // Cache implementation
 const cache = new InMemoryCache();
 
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext((_, {headers}) => {
   // return the headers to the context so httpLink can read them
   return {
     headers: {

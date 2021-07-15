@@ -150,6 +150,7 @@
       color: black;
     }
   }
+
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -160,6 +161,7 @@
   input[type=number] {
     -moz-appearance: textfield;
   }
+
   input[type=text], input[type=number] {
     width: 100%;
     border: 1px solid #2c3e50;
@@ -175,5 +177,9 @@
       margin-bottom: 5px;
       display: block;
     }
+  }
+
+  .modal-window button {
+    margin: 5px 5px 5px 0;
   }
 </style>

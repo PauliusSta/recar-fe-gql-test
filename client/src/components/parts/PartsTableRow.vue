@@ -21,7 +21,6 @@
 </template>
 
 <script>
-  import {EDIT_PARTS, GET_PARTS, REMOVE_PART} from "../../utils/querys";
   import VPartsModal from "./PartsModal";
 
   export default {
@@ -48,48 +47,10 @@
         this.showEditModal = !this.showEditModal;
       },
       handleEditSubmit(part) {
-        this.$apollo.mutate({
-          mutation: EDIT_PARTS,
-          variables: {
-            id: this.part.id,
-            input: part,
-          },
-          update: (cache) => {
-            try {
-              const data = cache.readQuery({
-                query: GET_PARTS
-              });
-
-              cache.writeQuery({
-                query: GET_PARTS,
-                data
-              });
-
-            } catch (e) {
-              console.error(e);
-            }
-          }
-        });
+        this.$emit('handleEditSubmit', {part, id: this.part.id});
       },
       handlePartsDelete() {
-        this.$apollo.mutate({
-          mutation: REMOVE_PART,
-          variables: {
-            id: this.part.id,
-          },
-          update: (store) => {
-            const data = store.readQuery({
-              query: GET_PARTS
-            });
-            data.parts = data.parts.filter(t => {
-              return t.id !== this.part.id;
-            });
-            store.writeQuery({
-              query: GET_PARTS,
-              data
-            });
-          }
-        });
+        this.$emit('handlePartsDelete', this.part.id);
       },
     },
     mounted() {

@@ -7,6 +7,7 @@
 <script>
 
   import VParts from './components/parts/Parts.vue'
+
   export default {
     name: 'App',
     components: {
@@ -26,6 +27,7 @@
     color: #2c3e50;
     margin-top: 60px;
   }
+
   * {
     box-sizing: border-box;
   }

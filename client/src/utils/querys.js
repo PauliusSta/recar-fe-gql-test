@@ -1,13 +1,5 @@
 import gql from "graphql-tag";
 
-/*const UPDATE_PARTS = gql`
-   mutation update_parts($id: string!, $isCompleted: Boolean!) {
-    update_todos(where: { id: { _eq: $id } }, _set: { is_completed: $isCompleted }) {
-       affected_rows
-     }
-   }id: ID!
-input: EditPartInput!
- `;*/
 
 export const EDIT_PARTS = gql`
       mutation editPart($id: ID!, $input: EditPartInput!) {
@@ -64,5 +56,5 @@ export const GET_PARTS = gql`
           model
           year
           color
-      }
+      },
     }`;
